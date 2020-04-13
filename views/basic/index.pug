@@ -40,3 +40,8 @@ block content
         p.text-right.small
           code
             em PID: #{ usage.pid } | CPU: #{ (usage.cpu).toFixed(2) }% | Memory: #{ (usage.memory / 1e6).toFixed(3) } MB | Elapsed: #{ (usage.elapsed / 1000 / 60 / 60).toFixed(2) }h
+        p.text-right.small
+          a.github-button(href='https://github.com/mgilangjanuar/pingpong' data-show-count='true' aria-label='Star mgilangjanuar/pingpong on GitHub') Star
+
+block scripts
+  script(async='' defer='' src='https://buttons.github.io/buttons.js')

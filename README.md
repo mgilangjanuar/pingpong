@@ -16,7 +16,7 @@ A simple downtime logger for your microservices
 
 Download the latest from [releases](https://github.com/mgilangjanuar/pingpong/releases), extract, and run `node index.js`
 
-Or build by yourself:
+Or, build by yourself:
 
 0. Clone repository
 
