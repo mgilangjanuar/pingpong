@@ -20,10 +20,10 @@ block content
       form(method='POST')
         .form-group
           label(for='token') Token
-          input#token.form-control(name='token' type='text' aria-describedby='tokenHelp', value=slack ? slack.token : '')
+          input#token.form-control(name='token' type='text' aria-describedby='tokenHelp', value=slack ? slack.token : '', required)
           small#tokenHelp.form-text.text-muted Enter token from Slack eg. `Bearer xoxb-2740046XXXXXX`
           label(for='channel') Channel
-          input#channel.form-control(name='channel' type='text' aria-describedby='channelHelp', value=slack ? slack.channel : '')
+          input#channel.form-control(name='channel' type='text' aria-describedby='channelHelp', value=slack ? slack.channel : '', required)
         button.btn.btn-primary.btn-sm(type='submit') Submit
 
   if slack

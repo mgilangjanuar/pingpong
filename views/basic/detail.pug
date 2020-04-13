@@ -19,9 +19,9 @@ block content
         form(method='POST')
           .form-group
             label(for='name') Name
-            input#name.form-control(name='name' type='text' aria-describedby='nameHelp', value=service.name)
+            input#name.form-control(name='name' type='text' aria-describedby='nameHelp', value=service.name, required)
             label(for='service') Service URL
-            input#service.form-control(name='service' type='url' aria-describedby='serviceHelp', value=service.url)
+            input#service.form-control(name='service' type='url' aria-describedby='serviceHelp', value=service.url, required)
             small#serviceHelp.form-text.text-muted Enter a service URL with /ping endpoint
           button.btn.btn-warning.btn-sm(type='submit') Update
 
