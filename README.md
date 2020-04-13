@@ -2,7 +2,7 @@
 
 A simple uptime logger for your microservices
 
-![pingpong](./assets/ss.png)
+![pingpong](./assets/ss1.png)
 
 ## Installation
 
