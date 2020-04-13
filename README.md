@@ -14,6 +14,10 @@ A simple downtime logger for your microservices
 
 ## Installation
 
+Download the latest from [releases](https://github.com/mgilangjanuar/pingpong/releases), extract, and run `node index.js`
+
+Or build by yourself:
+
 0. Clone repository
 
 ```
@@ -39,6 +43,15 @@ node dist/index.js
 ```
 
 Note: please use process manager like PM2 or Forever
+
+## Environment variables
+
+This app read `.env` file as environment variable
+
+Env Name | Default
+--- | ---
+PORT | 4001
+WORKER_INTERVAL | 1000
 
 ## License
 
