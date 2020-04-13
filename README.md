@@ -2,6 +2,8 @@
 
 A simple uptime logger for your microservices
 
+![pingpong dashboard](./assets/dashboard.png) ![pingpong detail](./assets/detail.png)
+
 ## Installation
 
 0. Clone repository
