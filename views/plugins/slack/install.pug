@@ -1,0 +1,28 @@
+extends ../../layout
+
+block content
+  .row
+    .col-md-6
+      nav(aria-label='breadcrumb')
+        ol.breadcrumb
+          li.breadcrumb-item
+            a(href='/') Home
+          li.breadcrumb-item
+            a(href='/get/' + index) Detail
+          li.breadcrumb-item.active(aria-current='page') Install Slack Notifier
+
+  h2 Install Slack Notifier
+
+  .row
+    .col-md-6
+      if _error
+        .alert.alert-danger(role='alert') #{ _error }
+      form(method='POST')
+        .form-group
+          label(for='token') Token
+          input#token.form-control(name='token' type='text' aria-describedby='tokenHelp', value=slack ? slack.token : '')
+          label(for='channel') Channel
+          input#channel.form-control(name='channel' type='text' aria-describedby='channelHelp', value=slack ? slack.channel : '')
+          label(for='text') Text
+          input#text.form-control(name='text' type='text' aria-describedby='textHelp', value=slack ? slack.text : '')
+        button.btn.btn-primary.btn-sm(type='submit') Submit

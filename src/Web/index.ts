@@ -13,7 +13,7 @@ export const Web = () => {
       services = []
     }
     const usage = await pidusage(process.pid)
-    return res.render('index', {
+    return res.render('basic/index', {
       _title: 'Index',
       services,
       usage
@@ -24,7 +24,7 @@ export const Web = () => {
     .get((req: Request, res: Response) => {
       const { index } = req.params
       const service = DB.service.getData(`/services[${index}]`)
-      return res.render('detail', {
+      return res.render('basic/detail', {
         _title: 'Detail',
         index,
         service
@@ -36,7 +36,7 @@ export const Web = () => {
       try {
         const services: any[] = DB.service.getData('/services')
         if (services.find((s: any) => s.url === service)) {
-          return res.render('detail', {
+          return res.render('basic/detail', {
             _title: 'Detail',
             _error: 'URL service already exists!',
             index,
@@ -53,7 +53,7 @@ export const Web = () => {
 
   router.route('/add')
     .get((_: Request, res: Response) => {
-      return res.render('add', {
+      return res.render('basic/add', {
         _title: 'Add service'
       })
     })
@@ -62,7 +62,7 @@ export const Web = () => {
       try {
         const services: any[] = DB.service.getData('/services')
         if (services.find((s: any) => s.url === service)) {
-          return res.render('add', {
+          return res.render('basic/add', {
             _title: 'Add service',
             _service: service,
             _error: 'URL service already exists!'

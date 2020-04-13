@@ -18,6 +18,17 @@ export const runWorker = () => {
 
         let currentStats: object = serv.currentStats || undefined
         if (serv.status === 'up' && status === 'down') {
+          if (serv.plugins?.slack) {
+            Axios.post('https://slack.com/api/chat.postMessage', {
+              channel: serv.plugins.slack.channel,
+              text: serv.plugins.slack.text,
+              username: 'pingpong service'
+            }, {
+              headers: {
+                Authorization: serv.plugins.slack.token
+              }
+            })
+          }
           currentStats = {
             downStartedAt: moment().format(),
             downEndedAt: undefined
