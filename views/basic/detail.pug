@@ -59,11 +59,13 @@ block content
             thead
               tr
                 th(scope='col') #
+                th(scope='col') Reason
                 th(scope='col') Started At
                 th(scope='col') Ended At
             tbody
               each down, i in service.history
                 tr
                   td #{ i + 1 }
+                  td #{ down.reason }
                   td #{ down.downStartedAt }
                   td #{ down.downEndedAt }

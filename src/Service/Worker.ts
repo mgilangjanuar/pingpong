@@ -19,15 +19,17 @@ export const runWorker = () => {
       const updated = services.map(async serv => {
 
         let status: string
+        let reason: string
         try {
           const request = await Axios.get(serv.url)
           status = request.status === 200 ? 'up' : 'down'
           if (request.status !== 200) {
-            console.error(request.data)
+            console.error('%j', request.data)
           }
         } catch (error) {
-          console.error(error)
+          console.error('%j', error)
           status = 'down'
+          reason = error.message
         }
 
         let currentStats: any = serv.currentStats || undefined
@@ -36,6 +38,7 @@ export const runWorker = () => {
             postToSlack(serv, `🔥 \`${serv.name}\` DOWN!\n\npingpong can\'t ping ${serv.url}`)
           }
           currentStats = {
+            reason,
             downStartedAt: moment().format(),
             downEndedAt: undefined
           }
