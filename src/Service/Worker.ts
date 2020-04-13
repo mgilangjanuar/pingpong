@@ -3,6 +3,16 @@ import moment from 'moment'
 import { DB } from './DB'
 
 export const runWorker = () => {
+  const postToSlack = (serv: any, text: string) => {
+    Axios.post('https://slack.com/api/chat.postMessage', {
+      channel: serv.plugins.slack.channel,
+      username: 'pingpong (down detector)',
+      text
+    }, {
+      headers: { Authorization: serv.plugins.slack.token }
+    })
+  }
+
   setInterval(async () => {
     try {
       const services: any[] = DB.service.getData('/services')
@@ -18,33 +28,17 @@ export const runWorker = () => {
 
         let currentStats: any = serv.currentStats || undefined
         if (serv.status === 'up' && status === 'down') {
-
           if (serv.plugins?.slack) {
-            Axios.post('https://slack.com/api/chat.postMessage', {
-              channel: serv.plugins.slack.channel,
-              username: 'pingpong (down detector)',
-              text: `🔥 \`${serv.name}\` DOWN!\n\npingpong can\'t ping ${serv.url}`
-            }, {
-              headers: { Authorization: serv.plugins.slack.token }
-            })
+            postToSlack(serv, `🔥 \`${serv.name}\` DOWN!\n\npingpong can\'t ping ${serv.url}`)
           }
-
           currentStats = {
             downStartedAt: moment().format(),
             downEndedAt: undefined
           }
         } else if (serv.status === 'down' && status === 'up') {
-
           if (serv.plugins?.slack) {
-            Axios.post('https://slack.com/api/chat.postMessage', {
-              channel: serv.plugins.slack.channel,
-              username: 'pingpong (down detector)',
-              text: `🧯 \`${serv.name}\` recovered!\n\n${serv.url} is down for ${(new Date().getTime() - new Date(currentStats?.downStartedAt).getTime()) / 1000 / 60} minutes`
-            }, {
-              headers: { Authorization: serv.plugins.slack.token }
-            })
+            postToSlack(serv, `🧯 \`${serv.name}\` recovered!\n\n${serv.url} is down for ${(new Date().getTime() - new Date(currentStats?.downStartedAt).getTime()) / 1000 / 60} minutes`)
           }
-
           currentStats = {
             ...currentStats,
             downEndedAt: moment().format()
