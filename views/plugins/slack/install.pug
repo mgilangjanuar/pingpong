@@ -25,3 +25,9 @@ block content
           label(for='channel') Channel
           input#channel.form-control(name='channel' type='text' aria-describedby='channelHelp', value=slack ? slack.channel : '')
         button.btn.btn-primary.btn-sm(type='submit') Submit
+
+  if slack
+    br
+    div
+      p
+        a.btn.btn-danger.btn-sm(href='/slack/' + index + '/uninstall') Uninstall Slack Notifier
