@@ -13,9 +13,6 @@ import { runWorker } from './Service/Worker'
 // initiate database
 DB.init()
 
-// run worker
-runWorker()
-
 const app = express()
 app.use(compression())
 app.use(bodyParser.json())
@@ -32,3 +29,6 @@ app.get('/ping', (_, res) => res.send({ pong: 1 }))
 app.use('', Web())
 
 app.listen(process.env.PORT || 4001, () => console.log(`Run at http://localhost:${process.env.PORT || 4001} ...`))
+
+// run worker
+runWorker()

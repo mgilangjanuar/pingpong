@@ -6,17 +6,17 @@ export const Web = () => {
   const router = Router()
 
   router.get('/', async (_: Request, res: Response) => {
-    const services = DB.service.getData('/services')
-    // const memoryUsed = process.memoryUsage().heapUsed / 1024
-    // const memoryTotal = process.memoryUsage().heapTotal / 1024
+    let services: any[]
+    try {
+      services = DB.service.getData('/services')
+    } catch (error) {
+      services = []
+    }
     const usage = await pidusage(process.pid)
     return res.render('index', {
       _title: 'Index',
       services,
       usage
-      // memoryUsed: Math.round(memoryUsed * 100) / 100,
-      // memoryTotal: Math.round(memoryTotal * 100) / 100,
-      // memoryPercent: Math.round(memoryUsed / memoryTotal * 10000 / 100),
     })
   })
 
