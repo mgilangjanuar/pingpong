@@ -13,6 +13,7 @@
   "author": "M Gilang Januar",
   "license": "ISC",
   "devDependencies": {
+    "@types/express": "^4.17.6",
     "@types/source-map-support": "^0.5.1",
     "@typescript-eslint/eslint-plugin": "^2.27.0",
     "@typescript-eslint/parser": "^2.27.0",
@@ -29,6 +30,8 @@
     "dotenv": "^8.2.0",
     "moment": "^2.24.0",
     "morgan": "^1.10.0",
-    "session": "^0.1.0"
+    "pug": "^2.0.4",
+    "session": "^0.1.0",
+    "source-map-support": "^0.5.16"
   }
 }
