@@ -35,5 +35,5 @@ block content
     br
     .row
       .col-md-6
-        p.text-right
-          em Memory used: #{ memoryUsed } / #{ memoryTotal } KB (#{ memoryPercent }%)
+        pre.text-right
+          em PID: #{ usage.pid } | CPU: #{ (usage.cpu).toFixed(2) }% | Memory: #{ (usage.memory / 1e6).toFixed(3) } MB | Elapsed: #{ (usage.elapsed / 1000 / 60 / 60).toFixed(2) }h

@@ -18,6 +18,7 @@
     "@types/express": "^4.17.6",
     "@types/morgan": "^1.9.0",
     "@types/node-json-db": "^0.9.3",
+    "@types/pidusage": "^2.0.1",
     "@types/pug": "^2.0.4",
     "@types/source-map-support": "^0.5.1",
     "@typescript-eslint/eslint-plugin": "^2.27.0",
@@ -38,6 +39,7 @@
     "moment": "^2.24.0",
     "morgan": "^1.10.0",
     "node-json-db": "^1.0.3",
+    "pidusage": "^2.0.18",
     "session": "^0.1.0",
     "source-map-support": "^0.5.16"
   }
