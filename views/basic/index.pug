@@ -16,24 +16,27 @@ block content
         table.table.table-responsive-md
           thead
             tr
+              th(scope='col') Name
               th(scope='col') URL
               th(scope='col') Status
               th(scope='col') Last Check
           tbody
             each service, i in services
               tr
-                td
-                  a(href=`/get/${i}`) #{ service.url }
+                td.text-nowrap
+                  a(href=`/get/${i}`) #{ service.name }
+                td.text-nowrap #{ service.url }
                 if service.status == 'up'
-                  td.table-success Up
+                  td.text-nowrap.table-success Up
                 else
-                  td.table-danger Down
-                td #{ service.lastCheck }
+                  td.text-nowrap.table-danger Down
+                td.text-nowrap #{ service.lastCheck }
 
   div
     br
     br
     .row
       .col-md-6
-        pre.text-right
-          em PID: #{ usage.pid } | CPU: #{ (usage.cpu).toFixed(2) }% | Memory: #{ (usage.memory / 1e6).toFixed(3) } MB | Elapsed: #{ (usage.elapsed / 1000 / 60 / 60).toFixed(2) }h
+        p.text-right.small
+          code
+            em PID: #{ usage.pid } | CPU: #{ (usage.cpu).toFixed(2) }% | Memory: #{ (usage.memory / 1e6).toFixed(3) } MB | Elapsed: #{ (usage.elapsed / 1000 / 60 / 60).toFixed(2) }h

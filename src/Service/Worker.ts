@@ -21,8 +21,7 @@ export const runWorker = () => {
           if (serv.plugins?.slack) {
             Axios.post('https://slack.com/api/chat.postMessage', {
               channel: serv.plugins.slack.channel,
-              text: serv.plugins.slack.text,
-              username: 'pingpong service'
+              username: 'pingpong (down detector)'
             }, {
               headers: {
                 Authorization: serv.plugins.slack.token

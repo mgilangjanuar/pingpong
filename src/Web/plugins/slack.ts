@@ -15,10 +15,10 @@ export const SlackPlugin = () => {
       })
     })
     .post((req: Request, res: Response) => {
-      const { token, channel, text } = req.body
+      const { token, channel } = req.body
       const { index } = req.params
       DB.service.push(`/services[${index}]/plugins/slack`, {
-        token, channel, text
+        token, channel
       })
       return res.redirect(`/get/${index}`)
     })

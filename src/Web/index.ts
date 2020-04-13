@@ -32,22 +32,8 @@ export const Web = () => {
     })
     .post((req: Request, res: Response) => {
       const { index } = req.params
-      const { service } = req.body
-      try {
-        const services: any[] = DB.service.getData('/services')
-        if (services.find((s: any) => s.url === service)) {
-          return res.render('basic/detail', {
-            _title: 'Detail',
-            _error: 'URL service already exists!',
-            index,
-            service: services[index],
-          })
-        }
-      } catch (error) {
-        // ignore when data not found
-      }
-
-      DB.service.push(`/services[${index}]`, { url: service, history: [] })
+      const { name, service } = req.body
+      DB.service.push(`/services[${index}]`, { name, url: service, history: [] })
       return res.redirect(`/get/${index}`)
     })
 
@@ -58,12 +44,13 @@ export const Web = () => {
       })
     })
     .post((req: Request, res: Response) => {
-      const { service } = req.body
+      const { name, service } = req.body
       try {
         const services: any[] = DB.service.getData('/services')
         if (services.find((s: any) => s.url === service)) {
           return res.render('basic/add', {
             _title: 'Add service',
+            _name: name,
             _service: service,
             _error: 'URL service already exists!'
           })
@@ -72,7 +59,7 @@ export const Web = () => {
         // ignore when data not found
       }
 
-      DB.service.push('/services[]', { url: service, history: [] })
+      DB.service.push('/services[]', { name, url: service, history: [] })
       return res.redirect('/')
     })
 

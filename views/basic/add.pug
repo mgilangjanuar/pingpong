@@ -17,6 +17,8 @@ block content
         .alert.alert-danger(role='alert') #{ _error }
       form(method='POST')
         .form-group
+          label(for='name') Name
+          input#name.form-control(name='name' type='text' aria-describedby='nameHelp', value=_name)
           label(for='service') Service URL
           input#service.form-control(name='service' type='url' aria-describedby='serviceHelp', value=_service)
           small#serviceHelp.form-text.text-muted Enter a service URL with /ping endpoint

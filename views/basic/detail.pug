@@ -18,12 +18,20 @@ block content
           .alert.alert-danger(role='alert') #{ _error }
         form(method='POST')
           .form-group
+            label(for='name') Name
+            input#name.form-control(name='name' type='text' aria-describedby='nameHelp', value=service.name)
             label(for='service') Service URL
             input#service.form-control(name='service' type='url' aria-describedby='serviceHelp', value=service.url)
             small#serviceHelp.form-text.text-muted Enter a service URL with /ping endpoint
           button.btn.btn-warning.btn-sm(type='submit') Update
 
   br
+  div
+    p
+      a.btn.btn-danger.btn-sm(href='/delete/' + index) Delete
+      | &nbsp;
+      a.btn.btn-success.btn-sm(href='/slack/' + index + '/install') Install Slack Notifier
+
   br
   div
     .row
@@ -39,11 +47,6 @@ block content
             tr
               th(scope='row') Last check
               td #{ service.lastCheck }
-
-  br
-  div
-    p
-      a.btn.btn-danger.btn-sm(href='/delete/' + index) Delete
 
   if service.history
     br
