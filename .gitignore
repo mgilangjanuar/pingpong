@@ -1,0 +1,8 @@
+.DS_Store
+.vscode
+.vs
+.env
+node_modules
+dist
+tests
+.clinic
