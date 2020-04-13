@@ -1,8 +1,16 @@
 # pingpong
 
-A simple uptime logger for your microservices
+A simple downtime logger for your microservices
 
 ![pingpong](./assets/ss1.png)
+
+## Features
+
+ - Log multiple services
+ - Using no database
+ - Using `setInterval`
+ - Slack notifier
+ - Simplicity at its best 👌
 
 ## Installation
 
@@ -31,3 +39,9 @@ node dist/index.js
 ```
 
 Note: please use process manager like PM2 or Forever
+
+## License
+
+MIT
+
+![high-five](https://media0.giphy.com/media/26BREWfA5cRZJbMd2/giphy.gif?cid=ecf05e4721370e49dc41cdc59e140f4c0337fcaa46553ddb&rid=giphy.gif)
