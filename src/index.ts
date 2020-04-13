@@ -1,4 +1,5 @@
 import 'source-map-support/register'
+require('dotenv').config({ path: '.env' })
 
 import compression from 'compression'
 import express from 'express'
