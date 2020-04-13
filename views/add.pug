@@ -1,11 +1,13 @@
 extends ./layout
 
 block content
-  nav(aria-label='breadcrumb')
-    ol.breadcrumb
-      li.breadcrumb-item
-        a(href='/') Home
-      li.breadcrumb-item.active(aria-current='page') Add service
+  .row
+    .col-md-6
+      nav(aria-label='breadcrumb')
+        ol.breadcrumb
+          li.breadcrumb-item
+            a(href='/') Home
+          li.breadcrumb-item.active(aria-current='page') Add service
 
   h2 Add service
 
