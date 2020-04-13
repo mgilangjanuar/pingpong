@@ -18,7 +18,13 @@ git clone https://github.com/mgilangjanuar/pingpong.git
 npm install
 ```
 
-2. Run!
+2. Build
+
+```
+npm run build.prod
+```
+
+3. Run!
 
 ```
 node dist/index.js
