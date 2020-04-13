@@ -22,7 +22,11 @@ export const runWorker = () => {
         try {
           const request = await Axios.get(serv.url)
           status = request.status === 200 ? 'up' : 'down'
+          if (request.status !== 200) {
+            console.error(request.data)
+          }
         } catch (error) {
+          console.error(error)
           status = 'down'
         }
 
@@ -56,5 +60,5 @@ export const runWorker = () => {
     } catch (error) {
       console.error(error)
     }
-  }, 1000)
+  }, parseInt(process.env.WORKER_INTERVAL) || 1000)
 }
