@@ -1,0 +1,21 @@
+extends ./layout
+
+block content
+  nav(aria-label='breadcrumb')
+    ol.breadcrumb
+      li.breadcrumb-item
+        a(href='/') Home
+      li.breadcrumb-item.active(aria-current='page') Add service
+
+  h2 Add service
+
+  .row
+    .col-md-6
+      if _error
+        .alert.alert-danger(role='alert') #{ _error }
+      form(method='POST')
+        .form-group
+          label(for='service') Service URL
+          input#service.form-control(name='service' type='url' aria-describedby='serviceHelp', value=_service)
+          small#serviceHelp.form-text.text-muted Enter a service URL with /ping endpoint
+        button.btn.btn-primary.btn-sm(type='submit') Submit

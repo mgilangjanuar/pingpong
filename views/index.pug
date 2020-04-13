@@ -1,0 +1,39 @@
+extends ./layout
+
+block content
+  h2 pingpong
+  p
+    em Simple downtime logger
+
+  br
+  p
+    a.btn.btn-success.btn-sm(type='button' href='/add') Add service
+
+  br
+  div
+    .row
+      .col-md-6
+        table.table.table-responsive-md
+          thead
+            tr
+              th(scope='col') URL
+              th(scope='col') Status
+              th(scope='col') Last Check
+          tbody
+            each service, i in services
+              tr
+                td
+                  a(href=`/get/${i}`) #{ service.url }
+                if service.status == 'up'
+                  td.table-success Up
+                else
+                  td.table-danger Down
+                td #{ service.lastCheck }
+
+  div
+    br
+    br
+    .row
+      .col-md-6
+        p.text-right
+          em Memory used: #{ memoryUsed } / #{ memoryTotal } KB (#{ memoryPercent }%)

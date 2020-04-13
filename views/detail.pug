@@ -1,0 +1,64 @@
+extends ./layout
+
+block content
+  nav(aria-label='breadcrumb')
+    ol.breadcrumb
+      li.breadcrumb-item
+        a(href='/') Home
+      li.breadcrumb-item.active(aria-current='page') Detail
+
+  h2 Detail
+
+  div
+    .row
+      .col-md-6
+        if _error
+          .alert.alert-danger(role='alert') #{ _error }
+        form(method='POST')
+          .form-group
+            label(for='service') Service URL
+            input#service.form-control(name='service' type='url' aria-describedby='serviceHelp', value=service.url)
+            small#serviceHelp.form-text.text-muted Enter a service URL with /ping endpoint
+          button.btn.btn-warning.btn-sm(type='submit') Update
+
+  br
+  br
+  div
+    .row
+      .col-md-6
+        table.table.table-responsive-md
+          tbody
+            tr
+              th(scope='row') Status
+              if service.status == 'up'
+                td.table-success Up
+              else
+                td.table-danger Down
+            tr
+              th(scope='row') Last check
+              td #{ service.lastCheck }
+
+  br
+  div
+    p
+      a.btn.btn-danger.btn-sm(href='/delete/' + index) Delete
+
+  if service.history
+    br
+    br
+    div
+      h4 Down history (#{service.history.length})
+      .row
+        .col-md-6
+          table.table.table-responsive-md
+            thead
+              tr
+                th(scope='col') #
+                th(scope='col') Started At
+                th(scope='col') Ended At
+            tbody
+              each down, i in service.history
+                tr
+                  td #{ i + 1 }
+                  td #{ down.downStartedAt }
+                  td #{ down.downEndedAt }
