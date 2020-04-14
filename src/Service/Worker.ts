@@ -2,8 +2,8 @@ import Axios from 'axios'
 import moment from 'moment'
 import { DB } from './DB'
 
-export const runWorker = () => {
-  const postToSlack = (serv: any, text: string) => {
+const postToSlack = (serv: any, text: string) => {
+  if (serv.plugins?.slack) {
     Axios.post('https://slack.com/api/chat.postMessage', {
       channel: serv.plugins.slack.channel,
       username: 'pingpong (down detector)',
@@ -12,12 +12,13 @@ export const runWorker = () => {
       headers: { Authorization: serv.plugins.slack.token }
     })
   }
+}
 
-  setInterval(async () => {
+export const runWorker = () => {
+  const worker = async () => {
     try {
       const services: any[] = DB.service.getData('/services')
-      const updated = services.map(async serv => {
-
+      services.map(async (serv, i) => {
         let status: string
         let reason: string
         try {
@@ -34,34 +35,32 @@ export const runWorker = () => {
 
         let currentStats: any = serv.currentStats || undefined
         if (serv.status === 'up' && status === 'down') {
-          if (serv.plugins?.slack) {
-            postToSlack(serv, `🔥 \`${serv.name}\` DOWN!\n\npingpong can\'t ping ${serv.url}`)
-          }
+          postToSlack(serv, `🔥 \`${serv.name}\` DOWN!\n\npingpong can\'t ping ${serv.url}`)
           currentStats = {
             reason,
             downStartedAt: moment().format(),
             downEndedAt: undefined
           }
         } else if (serv.status === 'down' && status === 'up') {
-          if (serv.plugins?.slack) {
-            postToSlack(serv, `🧯 \`${serv.name}\` recovered!\n\n${serv.url} is down for ${(new Date().getTime() - new Date(currentStats?.downStartedAt).getTime()) / 1000 / 60} minutes`)
-          }
+          postToSlack(serv, `🧯💨 \`${serv.name}\` recovered!\n\n${serv.url} is down for ${(new Date().getTime() - new Date(currentStats?.downStartedAt).getTime()) / 1000 / 60} minutes`)
           currentStats = {
             ...currentStats,
             downEndedAt: moment().format()
           }
         }
-        return {
-          ...serv,
+        DB.service.push(`/services[${i}]`, {
+          ...DB.service.getData(`/services[${i}]`),
           status,
           history: [currentStats, ...serv.history || []].filter(stat => stat?.downEndedAt),
           currentStats: status === 'down' ? currentStats : undefined,
           lastCheck: moment().format()
-        }
+        })
       })
-      DB.service.push('/services', await Promise.all(updated))
     } catch (error) {
-      console.error(error)
+      console.error('%j', error)
     }
-  }, parseInt(process.env.WORKER_INTERVAL) || 1000)
+    await new Promise(resolve => setTimeout(resolve, parseInt(process.env.WORKER_INTERVAL) || 1000))
+    worker()
+  }
+  worker()
 }

@@ -8,7 +8,6 @@ A simple downtime logger for your microservices
 
  - Log multiple services
  - Using no database
- - Using `setInterval`
  - Slack notifier
  - Simplicity at its best 👌
 
