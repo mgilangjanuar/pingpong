@@ -33,7 +33,7 @@ export const Web = () => {
     .post((req: Request, res: Response) => {
       const { index } = req.params
       const { name, service } = req.body
-      DB.service.push(`/services[${index}]`, { name, url: service, history: [] })
+      DB.service.push(`/services[${index}]`, { name, url: service, history: [], ...DB.service.getData(`/services[${index}]`) })
       return res.redirect(`/get/${index}`)
     })
 
