@@ -22,7 +22,7 @@ export const runWorker = () => {
         let status: string
         let reason: string
         try {
-          const request = await Axios.get(serv.url)
+          const request = await Axios.get(serv.url, { timeout:parseInt(process.env.MICROSERVICE_CONNECTION_TIMEOUT) || 5000 })
           status = request.status === 200 ? 'up' : 'down'
           if (request.status !== 200) {
             console.error('%j', request.data)

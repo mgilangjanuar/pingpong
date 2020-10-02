@@ -51,7 +51,7 @@ Env Name | Default
 --- | ---
 PORT | 4001
 WORKER_INTERVAL | 1000
-
+MICROSERVICE_CONNECTION_TIMEOUT | 5000
 ## License
 
 MIT
